@@ -28,7 +28,14 @@
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">
-                Round <el-tag v-if="match" type="success">#{{scope.row.number}}</el-tag>
+                Round <el-tag type="success">#{{scope.row.number}}</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column>
+              <template slot-scope="scope">
+                Time Is Up:
+                <el-tag v-if="scope.row.timeIsUp" type="danger">Yes</el-tag>
+                <el-tag v-else type="info">No</el-tag>
               </template>
             </el-table-column>
             <el-table-column>
