@@ -1,9 +1,10 @@
 <template>
-  <div class="matches">
-    <el-card class="box-card">
+  <div class="matches full-height">
+    <el-card class="box-card full-height" v-loading="isLoading">
       <div slot="header" class="clearfix">
         <span>Matches</span>
-        <el-button style="float: right; padding: 3px 0" type="text">Refresh</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text"
+                   @click="refresh">Refresh</el-button>
       </div>
       <el-table :data="matches" style="width: 100%">
         <el-table-column prop="id" label="Id"></el-table-column>
@@ -30,14 +31,29 @@ import { mapActions, mapState } from 'vuex';
 import { actionTypes } from '@/store/modules/matches';
 
 export default {
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapState('matches', ['matches']),
   },
   methods: {
     ...mapActions('matches', [actionTypes.INDEX]),
+    refresh() {
+      this.isLoading = true;
+      this[actionTypes.INDEX]().then(() => this.isLoading = false);
+    },
   },
   mounted() {
-    this[actionTypes.INDEX]({ page: 1 });
+    this[actionTypes.INDEX]().then(() => this.isLoading = false);
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.matches {
+  height: 100%;
+}
+</style>

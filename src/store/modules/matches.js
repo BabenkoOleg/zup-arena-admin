@@ -1,7 +1,7 @@
 import instance from '../instance';
 
 const endpoints = {
-  INDEX: page => `matches?page=${page}`,
+  INDEX: 'matches',
   SHOW: id => `matches/${id}`,
 };
 
@@ -25,8 +25,8 @@ export default {
   },
 
   actions: {
-    [actionTypes.INDEX]({ commit }, { page }) {
-      return instance.get(endpoints.INDEX(page))
+    [actionTypes.INDEX]({ commit }) {
+      return instance.get(endpoints.INDEX)
         .then(({ data }) => commit(mutationTypes.SET_MATCHES, { matches: data.data }))
         .catch(error => Promise.reject(error));
     },

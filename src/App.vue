@@ -43,8 +43,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /deep/ .el-main {
+    .full-height {
+      height: 100%;
+    }
+
     .el-card {
       border: 1px solid #353b412e;
+
+      &.full-height {
+        height: 100%;
+
+        .el-card__body {
+          height: calc(100% - 59px);
+          overflow: scroll;
+        }
+      }
+
+      &__body {
+        padding: 0 20px;
+      }
     }
 
     .el-tag {
@@ -53,7 +70,7 @@ body {
     }
 
     .el-table {
-      .el-table__row {
+      &__row {
         td, th {
           padding: 8px 0;
         }
