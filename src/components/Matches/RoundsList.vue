@@ -1,6 +1,6 @@
 <template>
   <div class="rounds">
-    <el-table :data="rounds" style="width: 100%" :show-header="false">
+    <el-table :data="rounds" style="width: 100%">
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-table :data="props.row.kills" style="width: 100%">
@@ -16,21 +16,20 @@
           </el-table>
         </template>
       </el-table-column>
-      <el-table-column>
+      <el-table-column align="center" label="Round">
         <template slot-scope="scope">
-          Round <el-tag type="success">#{{scope.row.number}}</el-tag>
+          <el-tag type="success">#{{scope.row.number}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column>
+      <el-table-column align="center" label="Time Is Up">
         <template slot-scope="scope">
-          Time Is Up:
           <el-tag v-if="scope.row.timeIsUp" type="danger">Yes</el-tag>
           <el-tag v-else type="info">No</el-tag>
         </template>
       </el-table-column>
-      <el-table-column>
+      <el-table-column align="center" label="Winning Teams">
         <template slot-scope="scope">
-          Winning Teams: {{scope.row.winningTeams.join(', ')}}
+          {{scope.row.winningTeams.join(', ')}}
         </template>
       </el-table-column>
     </el-table>

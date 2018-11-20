@@ -8,7 +8,9 @@
                    @click="refresh">Refresh</el-button>
       </div>
       <el-tabs v-if="match" v-model="activeName">
-        <el-tab-pane label="Users" name="users">Users</el-tab-pane>
+        <el-tab-pane label="Users" name="users">
+          <users-list :users="match.users"></users-list>
+        </el-tab-pane>
         <el-tab-pane label="Rounds" name="rounds">
           <rounds-list :rounds="match.rounds"></rounds-list>
         </el-tab-pane>
@@ -21,6 +23,7 @@
 import { mapActions } from 'vuex';
 import { actionTypes } from '@/store/modules/matches';
 import RoundsList from '@/components/Matches/RoundsList';
+import UsersList from '@/components/Matches/UsersList';
 
 export default {
   data() {
@@ -32,6 +35,7 @@ export default {
   },
   components: {
     RoundsList,
+    UsersList,
   },
   methods: {
     ...mapActions('matches', [actionTypes.SHOW]),
