@@ -28,7 +28,7 @@ import UsersList from '@/components/Matches/UsersList';
 export default {
   data() {
     return {
-      activeName: 'rounds',
+      activeName: 'users',
       isLoading: false,
       match: null,
     };
@@ -57,25 +57,5 @@ export default {
 <style lang="scss" scoped>
 .match {
   height: 100%;
-
-  // /deep/ .el-table {
-  //   .el-table__body-wrapper {
-  //     .el-table__expanded-cell {
-  //       padding: 0;
-
-  //       .el-icon-success {
-  //         color: #67c23a;
-  //       }
-
-  //       .el-icon-warning {
-  //         color: #e6a23c;
-  //       }
-
-  //       .el-icon-error {
-  //         color: #f56c6c;
-  //       }
-  //     }
-  //   }
-  // }
 }
 </style>
