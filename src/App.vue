@@ -21,9 +21,7 @@ export default {
     AppHeader,
     AppSideBar,
   },
-  methods: {
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -43,5 +41,24 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /deep/ .el-main {
+    .el-card {
+      border: 1px solid #353b412e;
+    }
+
+    .el-tag {
+      height: 20px;
+      line-height: 18px;
+    }
+
+    .el-table {
+      .el-table__row {
+        td, th {
+          padding: 8px 0;
+        }
+      }
+    }
+  }
 }
 </style>
