@@ -10,31 +10,22 @@ export const actionTypes = {
   SHOW: 'SHOW',
 };
 
-export const mutationTypes = {
-  SET_MATCHES: 'SET_MATCHES',
-  SET_MATCH: 'SET_MATCH',
-};
-
 export default {
   namespaced: true,
 
-  state: {
-    matches: [],
-    page: 1,
-    match: null,
-  },
+  state: {},
 
   actions: {
-    [actionTypes.INDEX]({ commit }) {
+    [actionTypes.INDEX]() {
       return instance.get(endpoints.INDEX)
-        .then(({ data }) => commit(mutationTypes.SET_MATCHES, { matches: data.data }))
+        .then(({ data }) => Promise.resolve(data.data))
         .catch(error => Promise.reject(error));
     },
-  },
 
-  mutations: {
-    [mutationTypes.SET_MATCHES](state, payload) {
-      state.matches = payload.matches;
+    [actionTypes.SHOW](context, { id }) {
+      return instance.get(endpoints.SHOW(id))
+        .then(({ data }) => Promise.resolve(data.data))
+        .catch(error => Promise.reject(error));
     },
   },
 };

@@ -6,7 +6,7 @@
         <el-button style="float: right; padding: 3px 0" type="text"
                    @click="refresh">Refresh</el-button>
       </div>
-      <el-table :data="matches" style="width: 100%">
+      <el-table :data="matches" style="width: 100%" @row-click="openMatch">
         <el-table-column prop="id" label="Id"></el-table-column>
         <el-table-column label="State">
           <template slot-scope="scope">
@@ -24,30 +24,39 @@
       </el-table>
     </el-card>
   </div>
+  <!-- <router-link class="button button_edit-deal is-primary is-small"
+                       :to="{ name: 'AdminPressReleaseEdit', params: { id: props.row.id } }">
+            <b-icon icon="pencil" size="is-small"></b-icon>
+          </router-link> -->
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import { actionTypes } from '@/store/modules/matches';
 
 export default {
   data() {
     return {
       isLoading: true,
+      matches: [],
     };
-  },
-  computed: {
-    ...mapState('matches', ['matches']),
   },
   methods: {
     ...mapActions('matches', [actionTypes.INDEX]),
     refresh() {
       this.isLoading = true;
-      this[actionTypes.INDEX]().then(() => this.isLoading = false);
+      this[actionTypes.INDEX]().then((matches) => {
+        this.matches = matches;
+        this.isLoading = false;
+      });
+    },
+    openMatch(row) {
+      const index = (this.matches.indexOf(row));
+      this.$router.push({ name: 'MatchesShow', params: { id: this.matches[index].id } });
     },
   },
   mounted() {
-    this[actionTypes.INDEX]().then(() => this.isLoading = false);
+    this.refresh();
   },
 };
 </script>
@@ -55,5 +64,11 @@ export default {
 <style lang="scss" scoped>
 .matches {
   height: 100%;
+
+  /deep/ .el-table__row {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 </style>
