@@ -7,15 +7,15 @@
                    @click="refresh">Refresh</el-button>
       </div>
       <el-table :data="matches" style="width: 100%" @row-click="openMatch">
-        <el-table-column prop="id" label="Id"></el-table-column>
-        <el-table-column label="State">
+        <el-table-column align="center" prop="id" label="Id"></el-table-column>
+        <el-table-column align="center" label="State">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.state === 'active'"
                     type="success">{{ scope.row.state }}</el-tag>
             <el-tag v-else type="info">{{ scope.row.state }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="Date">
+        <el-table-column align="center" label="Date">
           <template slot-scope="scope">
             <i class="el-icon-time"></i>
             <span style="margin-left: 10px">{{ $toDate(scope.row.createdAt) }}</span>
@@ -24,10 +24,6 @@
       </el-table>
     </el-card>
   </div>
-  <!-- <router-link class="button button_edit-deal is-primary is-small"
-                       :to="{ name: 'AdminPressReleaseEdit', params: { id: props.row.id } }">
-            <b-icon icon="pencil" size="is-small"></b-icon>
-          </router-link> -->
 </template>
 
 <script>

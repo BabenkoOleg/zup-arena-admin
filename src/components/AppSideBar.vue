@@ -7,7 +7,7 @@
                  text-color="#fff"
                  active-text-color="#ffd04b">
           <el-menu-item index="/matches">Matches</el-menu-item>
-          <el-menu-item index="1">Users</el-menu-item>
+          <el-menu-item index="/users">Users</el-menu-item>
           <el-submenu index="3">
             <template slot="title"><span>Settings</span></template>
             <el-menu-item index="1-1">Lootboxes</el-menu-item>
