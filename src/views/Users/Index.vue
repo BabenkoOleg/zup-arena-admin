@@ -6,11 +6,14 @@
         <el-button style="float: right; padding: 3px 0" type="text"
                    @click="refresh">Refresh</el-button>
       </div>
-      <el-table :data="users" style="width: 100%" @row-click="openMatch">
+      <el-table :data="users" style="width: 100%"> <!-- @row-click="openMatch" -->
         <el-table-column align="center" prop="steamId" label="Steam Id"></el-table-column>
         <el-table-column align="center" prop="level" label="Level"></el-table-column>
         <el-table-column align="center" prop="rank" label="Rank"></el-table-column>
-        <el-table-column align="center" prop="activeMatch" label="Active Match"></el-table-column>
+        <el-table-column align="center" prop="money" label="Money"></el-table-column>
+        <el-table-column align="center" prop="xp" label="XP"></el-table-column>
+        <el-table-column align="center" prop="frags" label="Frags"></el-table-column>
+        <el-table-column align="center" prop="matches" label="Matches"></el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -38,7 +41,7 @@ export default {
     },
     openMatch(row) {
       const index = (this.users.indexOf(row));
-      // this.$router.push({ name: 'UsersShow', params: { id: this.users[index].id } });
+      this.$router.push({ name: 'UsersShow', params: { id: this.users[index].steamId } });
     },
   },
   mounted() {
