@@ -12,6 +12,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-param-reassign': 'off',
     'no-return-assign': 'off',
+    'no-unused-expressions': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': ['off', 'always', {
       'js': 'never',
