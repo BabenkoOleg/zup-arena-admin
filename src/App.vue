@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ auth: !isLoggedIn }">
     <el-container class="is-vertical">
-      <app-header></app-header>
+      <app-header v-if="isLoggedIn"></app-header>
       <el-container>
-        <app-side-bar></app-side-bar>
+        <app-side-bar v-if="isLoggedIn"></app-side-bar>
         <el-main>
           <router-view/>
         </el-main>
@@ -13,14 +13,27 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import AppHeader from '@/components/AppHeader';
 import AppSideBar from '@/components/AppSideBar';
+import { actionTypes as authActionTypes } from '@/store/modules/auth';
+
 
 export default {
   components: {
     AppHeader,
     AppSideBar,
   },
+
+  computed: {
+    ...mapState('auth', ['isLoggedIn']),
+  },
+
+  mounted() {
+    if (this.isLoggedIn && this.$router.currentRoute.name === 'AuthIndex') {
+      this.$router.push({ name: 'MatchesIndex' });
+    }
+  }
 };
 </script>
 
@@ -41,6 +54,10 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &.auth {
+    background: #262c30;
+  }
 
   /deep/ .el-main {
     .full-height {

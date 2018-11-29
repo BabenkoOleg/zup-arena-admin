@@ -1,11 +1,23 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import AuthIndex from '@/views/Auth/Index';
+
 import MatchesIndex from '@/views/Matches/Index';
 import MatchesShow from '@/views/Matches/Show';
 
 import UsersIndex from '@/views/Users/Index';
 import UsersShow from '@/views/Users/Show';
+
+import store from '@/store';
+
+const ifNotAuthenticated = (to, from, next) => {
+  store.state.auth.isLoggedIn ? next({ name: 'MatchesIndex' }) : next();
+};
+
+const ifAuthenticated = (to, from, next) => {
+  store.state.auth.isLoggedIn ? next() : next({ name: 'AuthIndex' });
+};
 
 Vue.use(Router);
 
@@ -14,24 +26,35 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/matches',
+      path: '/sign-in',
+      name: 'AuthIndex',
+      component: AuthIndex,
+      beforeEnter: ifNotAuthenticated,
+    },
+    {
+      path: '/',
+      alias: '/matches',
       name: 'MatchesIndex',
       component: MatchesIndex,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/matches/:id',
       name: 'MatchesShow',
       component: MatchesShow,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/users',
       name: 'UsersIndex',
       component: UsersIndex,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/:id',
       name: 'UsersShow',
       component: UsersShow,
+      beforeEnter: ifAuthenticated,
     },
   ],
 });
