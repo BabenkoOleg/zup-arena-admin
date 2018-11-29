@@ -22,7 +22,12 @@
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="success" :disabled="!isValid" @click="signIn">Sign In</el-button>
+          <el-button type="success"
+                     :disabled="!isValid"
+                     :loading="isLoading"
+                     @click="signIn">
+            Sign In
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -49,6 +54,7 @@ export default {
           { min: 8, message: 'Must not be less than 8 characters', trigger: 'blur' },
         ],
       },
+      isLoading: false,
       isLoginValid: false,
       isPasswordValid: false,
     };
@@ -62,13 +68,16 @@ export default {
     ...mapActions('auth', [authActionTypes.SIGN_IN]),
 
     signIn() {
+      this.isLoading = true;
       this[authActionTypes.SIGN_IN]({
         login: this.form.login,
         password: this.form.password,
       }).then((message) => {
+        this.isLoading = false;
         this.$message({ message, type: 'success' });
         this.$router.push({ name: 'MatchesIndex' });
       }).catch((error) => {
+        this.isLoading = false;
         this.$message({ message: error.response.data.error, type: 'error' });
       });
     },
