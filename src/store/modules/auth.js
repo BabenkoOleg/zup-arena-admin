@@ -12,7 +12,7 @@ export const actionTypes = {
 
 export const mutationTypes = {
   SET_JWT: 'SET_JWT',
-  SET_IS_LOGGED_ID: 'SET_IS_LOGGED_ID',
+  SET_IS_LOGGED_IN: 'SET_IS_LOGGED_IN',
   CLEAR_JWT: 'CLEAR_JWT',
 };
 
@@ -21,15 +21,14 @@ export default {
 
   state: {
     isLoggedIn: !!localStorage.getItem('jwt'),
-    jwt: localStorage.getItem('jwt') || null,
   },
 
   actions: {
     [actionTypes.SIGN_IN]({ commit }, { login, password }) {
       return instance.post(endpoints.CREATE, { login, password })
-        .then(({ jwt }) => {
-          commit(mutationTypes.SET_JWT, jwt);
-          commit(mutationTypes.SET_IS_LOGGED_ID, true);
+        .then(({ data }) => {
+          commit(mutationTypes.SET_JWT, data.jwt);
+          commit(mutationTypes.SET_IS_LOGGED_IN, true);
           return Promise.resolve('Signed in successfully');
         });
     },
@@ -43,16 +42,14 @@ export default {
 
   mutations: {
     [mutationTypes.SET_JWT](state, jwt) {
-      state.jwt = jwt;
       localStorage.setItem('jwt', jwt);
     },
 
-    [mutationTypes.SET_IS_LOGGED_ID](state, isLoggedIn) {
+    [mutationTypes.SET_IS_LOGGED_IN](state, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
     },
 
-    [mutationTypes.CLEAR_CURRENT_USER](state) {
-      state.jwt = null;
+    [mutationTypes.CLEAR_JWT]() {
       localStorage.removeItem('jwt');
     },
   },
