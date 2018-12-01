@@ -21,11 +21,11 @@ export default {
   .logo {
     background-color: #282c31;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 60px;
     margin: 0;
     padding: 0 20px;
-    width: 210px;
+    width: 160px;
   }
 }
 </style>

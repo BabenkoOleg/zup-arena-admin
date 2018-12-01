@@ -1,5 +1,5 @@
 <template>
-  <el-aside width="250px">
+  <el-aside width="200px">
     <el-row class="tac">
       <el-col :span="24">
         <el-menu :router="true"

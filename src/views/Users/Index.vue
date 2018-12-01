@@ -7,13 +7,47 @@
                    @click="refresh">Refresh</el-button>
       </div>
       <el-table :data="users" style="width: 100%"> <!-- @row-click="openMatch" -->
-        <el-table-column align="center" prop="steamId" label="Steam Id"></el-table-column>
-        <el-table-column align="center" prop="level" label="Level"></el-table-column>
-        <el-table-column align="center" prop="rank" label="Rank"></el-table-column>
-        <el-table-column align="center" prop="money" label="Money"></el-table-column>
-        <el-table-column align="center" prop="xp" label="XP"></el-table-column>
-        <el-table-column align="center" prop="frags" label="Frags"></el-table-column>
-        <el-table-column align="center" prop="matches" label="Matches"></el-table-column>
+        <el-table-column align="center" label="User">
+          <template slot-scope="scope">
+            Nickname (coming soon)<br>
+            {{ scope.row.steamId }}
+          </template>
+        </el-table-column>
+
+        <el-table-column align="center" width="90" prop="level" label="Level">
+        </el-table-column>
+
+        <el-table-column align="center" width="90" prop="rank" label="Rank">
+        </el-table-column>
+
+        <el-table-column align="center" width="90" prop="money" label="Money">
+        </el-table-column>
+
+        <el-table-column align="center" width="90" prop="xp" label="XP">
+        </el-table-column>
+
+        <el-table-column align="center" width="90" prop="matches" label="Matches">
+        </el-table-column>
+
+        <el-table-column align="center" width="90" label="Frags">
+          <el-table-column align="center" width="90" label="Approved">
+            <template slot-scope="scope">
+              {{ scope.row.frags.approved }}
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center" width="90" label="Teammate">
+            <template slot-scope="scope">
+              {{ scope.row.frags.forfeits }}
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center" width="90" label="Suicide">
+            <template slot-scope="scope">
+              {{ scope.row.frags.suicides }}
+            </template>
+          </el-table-column>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>

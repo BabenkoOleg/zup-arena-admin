@@ -13,11 +13,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import AppHeader from '@/components/AppHeader';
 import AppSideBar from '@/components/AppSideBar';
-import { actionTypes as authActionTypes } from '@/store/modules/auth';
-
 
 export default {
   components: {
@@ -33,7 +31,7 @@ export default {
     if (this.isLoggedIn && this.$router.currentRoute.name === 'AuthIndex') {
       this.$router.push({ name: 'MatchesIndex' });
     }
-  }
+  },
 };
 </script>
 
@@ -87,6 +85,18 @@ body {
     }
 
     .el-table {
+      .el-table__header-wrapper {
+        .el-table__header {
+          .is-group {
+            tr {
+              th {
+                background-color: #fff;
+              }
+            }
+          }
+        }
+      }
+
       &__row {
         td, th {
           padding: 8px 0;

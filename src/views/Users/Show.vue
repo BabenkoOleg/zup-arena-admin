@@ -8,12 +8,6 @@
                    @click="refresh">Refresh</el-button>
       </div>
       <el-tabs v-if="user" v-model="activeName">
-        <!-- <el-tab-pane label="Users" name="users">
-          <users-list :users="user.users"></users-list>
-        </el-tab-pane>
-        <el-tab-pane label="Rounds" name="rounds">
-          <rounds-list :rounds="user.rounds"></rounds-list>
-        </el-tab-pane> -->
       </el-tabs>
     </el-card>
   </div>
