@@ -7,6 +7,7 @@ import instance from './instance';
 import router from '../router';
 
 import auth from './modules/auth';
+import apiLogs from './modules/apiLogs';
 import matches from './modules/matches';
 import users from './modules/users';
 
@@ -17,6 +18,7 @@ const store = new Vuex.Store({
   },
   modules: {
     auth,
+    apiLogs,
     matches,
     users,
   },

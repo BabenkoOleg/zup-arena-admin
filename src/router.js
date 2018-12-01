@@ -3,6 +3,9 @@ import Router from 'vue-router';
 
 import AuthIndex from '@/views/Auth/Index';
 
+import ApiLogsIndex from '@/views/ApiLogs/Index';
+import ApiLogsShow from '@/views/ApiLogs/Show';
+
 import MatchesIndex from '@/views/Matches/Index';
 import MatchesShow from '@/views/Matches/Show';
 
@@ -54,6 +57,18 @@ export default new Router({
       path: '/users/:id',
       name: 'UsersShow',
       component: UsersShow,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/api-logs',
+      name: 'ApiLogsIndex',
+      component: ApiLogsIndex,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/api-logs/:id',
+      name: 'ApiLogsShow',
+      component: ApiLogsShow,
       beforeEnter: ifAuthenticated,
     },
   ],
