@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import { actionTypes as authActionTypes } from '@/store/modules/auth';
 
 export default {
@@ -62,7 +62,7 @@ export default {
   computed: {
     isValid() {
       return this.isLoginValid && this.isPasswordValid;
-    }
+    },
   },
   methods: {
     ...mapActions('auth', [authActionTypes.SIGN_IN]),
