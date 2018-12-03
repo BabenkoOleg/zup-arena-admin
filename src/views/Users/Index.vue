@@ -6,30 +6,32 @@
         <el-button style="float: right; padding: 3px 0" type="text"
                    @click="refresh">Refresh</el-button>
       </div>
-      <el-table :data="users" style="width: 100%"> <!-- @row-click="openMatch" -->
+      <el-table :data="users" style="width: 100%" @row-click="openUser">
         <el-table-column align="center" label="User">
           <template slot-scope="scope">
-            Nickname (coming soon)<br>
-            {{ scope.row.steamId }}
+            {{ scope.row.steamName }} ({{ scope.row.steamId }})
           </template>
         </el-table-column>
 
-        <el-table-column align="center" width="90" prop="level" label="Level">
+        <el-table-column align="center" width="120" prop="level" label="Level">
         </el-table-column>
 
-        <el-table-column align="center" width="90" prop="rank" label="Rank">
+        <el-table-column align="center" width="120" prop="rank" label="Rank">
         </el-table-column>
 
-        <el-table-column align="center" width="90" prop="money" label="Money">
+        <el-table-column align="center" width="120" prop="matches" label="Matches">
         </el-table-column>
 
-        <el-table-column align="center" width="90" prop="xp" label="XP">
+        <el-table-column align="center" width="120" prop="frags" label="Frags">
         </el-table-column>
 
-        <el-table-column align="center" width="90" prop="matches" label="Matches">
+        <el-table-column align="center" width="120" prop="money" label="Money">
         </el-table-column>
 
-        <el-table-column align="center" width="90" label="Frags">
+        <el-table-column align="center" width="120" prop="xp" label="XP">
+        </el-table-column>
+
+        <!-- <el-table-column align="center" width="90" label="Frags">
           <el-table-column align="center" width="90" label="Approved">
             <template slot-scope="scope">
               {{ scope.row.frags.approved }}
@@ -47,7 +49,7 @@
               {{ scope.row.frags.suicides }}
             </template>
           </el-table-column>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
     </el-card>
   </div>
@@ -73,7 +75,7 @@ export default {
         this.isLoading = false;
       });
     },
-    openMatch(row) {
+    openUser(row) {
       const index = (this.users.indexOf(row));
       this.$router.push({ name: 'UsersShow', params: { id: this.users[index].steamId } });
     },

@@ -3,25 +3,25 @@
     <el-table :data="users" style="width: 100%">
       <el-table-column align="center" label="User">
         <template slot-scope="scope">
-          Nickname (coming soon)<br>
+          {{ scope.row.steamName || 'SteamName not yet received' }}<br>
           {{ scope.row.steamId }}
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="Frags">
-        <el-table-column align="center" width="90" label="Approved">
+        <el-table-column align="center" width="100" label="Enemies">
           <template slot-scope="scope">
-            {{ scope.row.frags.approved }}
+            {{ scope.row.frags.enemies }}
           </template>
         </el-table-column>
 
-        <el-table-column align="center" width="90" label="Teammate">
+        <el-table-column align="center" width="100" label="Teammates">
           <template slot-scope="scope">
-            {{ scope.row.frags.forfeits }}
+            {{ scope.row.frags.teammates }}
           </template>
         </el-table-column>
 
-        <el-table-column align="center" width="90" label="Suicide">
+        <el-table-column align="center" width="100" label="Suicides">
           <template slot-scope="scope">
             {{ scope.row.frags.suicides }}
           </template>

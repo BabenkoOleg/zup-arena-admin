@@ -5,13 +5,21 @@
         <template slot-scope="props">
           <el-table :data="props.row.kills" style="width: 100%">
             <el-table-column align="center" prop="killer" label="Killer"></el-table-column>
-            <el-table-column align="center" prop="killerTeam" label="Team"></el-table-column>
-            <el-table-column align="center">
+            <el-table-column align="center"
+                             width="90"
+                             prop="killerTeam"
+                             label="Team">
+            </el-table-column>
+            <el-table-column align="center" width="90">
               <template slot-scope="scope">
                 <i :class="killClass(scope.row)"></i>
               </template>
             </el-table-column>
-            <el-table-column align="center" prop="targetTeam" label="Team"></el-table-column>
+            <el-table-column align="center"
+                             width="90"
+                             prop="targetTeam"
+                             label="Team">
+            </el-table-column>
             <el-table-column align="center" prop="target" label="Target"></el-table-column>
           </el-table>
         </template>
