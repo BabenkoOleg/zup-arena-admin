@@ -3,7 +3,7 @@
     <el-table :data="users" style="width: 100%">
       <el-table-column align="center" label="User">
         <template slot-scope="scope">
-          {{ scope.row.steamName || 'SteamName not yet received' }}<br>
+          {{ scope.row.steamName || 'No SteamName yet' }}<br>
           {{ scope.row.steamId }}
         </template>
       </el-table-column>

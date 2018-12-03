@@ -9,7 +9,7 @@
       <el-table :data="users" style="width: 100%" @row-click="openUser">
         <el-table-column align="center" label="User">
           <template slot-scope="scope">
-            {{ scope.row.steamName }} ({{ scope.row.steamId }})
+            {{ scope.row.steamName || 'No SteamName yet' }} ({{ scope.row.steamId }})
           </template>
         </el-table-column>
 

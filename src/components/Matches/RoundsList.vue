@@ -4,7 +4,11 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-table :data="props.row.kills" style="width: 100%">
-            <el-table-column align="center" prop="killer" label="Killer"></el-table-column>
+            <el-table-column align="center" label="Killer">
+              <template slot-scope="scope">
+                {{ scope.row.killerName || 'No SteamName yet' }} ({{ scope.row.killer }})
+              </template>
+            </el-table-column>
             <el-table-column align="center"
                              width="90"
                              prop="killerTeam"
@@ -20,7 +24,11 @@
                              prop="targetTeam"
                              label="Team">
             </el-table-column>
-            <el-table-column align="center" prop="target" label="Target"></el-table-column>
+            <el-table-column align="center" label="Target">
+              <template slot-scope="scope">
+                {{ scope.row.targetName || 'No SteamName yet' }} ({{ scope.row.target }})
+              </template>
+            </el-table-column>
           </el-table>
         </template>
       </el-table-column>
