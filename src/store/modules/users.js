@@ -1,13 +1,14 @@
 import instance from '../instance';
 
 const endpoints = {
-  INDEX: 'users',
-  SHOW: id => `users/${id}`,
+  USERS: 'users',
+  USER: id => `users/${id}`,
 };
 
 export const actionTypes = {
   INDEX: 'INDEX',
   SHOW: 'SHOW',
+  UPDATE: 'UPDATE',
 };
 
 export default {
@@ -17,13 +18,19 @@ export default {
 
   actions: {
     [actionTypes.INDEX]() {
-      return instance.get(endpoints.INDEX)
+      return instance.get(endpoints.USERS)
         .then(({ data }) => Promise.resolve(data.data))
         .catch(error => Promise.reject(error));
     },
 
     [actionTypes.SHOW](context, { id }) {
-      return instance.get(endpoints.SHOW(id))
+      return instance.get(endpoints.USER(id))
+        .then(({ data }) => Promise.resolve(data.data))
+        .catch(error => Promise.reject(error));
+    },
+
+    [actionTypes.UPDATE](context, { id, params }) {
+      return instance.put(endpoints.USER(id), params)
         .then(({ data }) => Promise.resolve(data.data))
         .catch(error => Promise.reject(error));
     },
