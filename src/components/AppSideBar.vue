@@ -1,5 +1,8 @@
 <template>
   <el-aside width="200px">
+    <div class="header">
+      <p class="logo">Zup! Arena Admin</p>
+    </div>
     <el-row class="tac">
       <el-col :span="24">
         <el-menu :router="true"
@@ -29,8 +32,27 @@ export default {
 <style lang="scss" scoped>
 .el-aside {
   background-color: #353b41;
-  padding-top: 15px;
   z-index: 1;
+
+  .header {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.59);
+    display: flex;
+    height: 59px;
+    margin-bottom: 15px;
+    padding: 0;
+    z-index: 2;
+
+    .logo {
+      background-color: #282c31;
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 59px;
+      margin: 0;
+      padding: 0 20px;
+      width: 160px;
+    }
+  }
 
   .el-menu {
     border-right: none;

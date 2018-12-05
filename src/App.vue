@@ -1,25 +1,20 @@
 <template>
   <div id="app" :class="{ auth: !isLoggedIn }">
-    <el-container class="is-vertical">
-      <app-header v-if="isLoggedIn"></app-header>
-      <el-container>
-        <app-side-bar v-if="isLoggedIn"></app-side-bar>
-        <el-main>
-          <router-view/>
-        </el-main>
-      </el-container>
+    <el-container class="main-wrapper">
+      <app-side-bar v-if="isLoggedIn"></app-side-bar>
+      <el-main>
+        <router-view/>
+      </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import AppHeader from '@/components/AppHeader';
 import AppSideBar from '@/components/AppSideBar';
 
 export default {
   components: {
-    AppHeader,
     AppSideBar,
   },
 
@@ -39,7 +34,7 @@ export default {
 html,
 body,
 #app,
-.is-vertical {
+.main-wrapper {
   height: 100%;
 }
 
@@ -57,13 +52,15 @@ body {
     background: #262c30;
   }
 
-  /deep/ .el-main {
+  .el-main {
+    padding: 0px;
+
     .full-height {
       height: 100%;
     }
 
     .el-card {
-      border: 1px solid #353b412e;
+      border: none;
 
       &.full-height {
         height: 100%;
