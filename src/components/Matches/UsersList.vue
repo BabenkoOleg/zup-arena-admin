@@ -28,16 +28,16 @@
         </el-table-column>
       </el-table-column>
 
-      <el-table-column align="center" prop="team" width="70" label="Team"></el-table-column>
+      <el-table-column align="center" prop="team" width="90" label="Team"></el-table-column>
 
-      <el-table-column align="center" width="70" label="Left">
+      <el-table-column align="center" width="90" label="Deserter">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.left" type="danger">Yes</el-tag>
+          <el-tag v-if="scope.row.deserter" type="danger">Yes</el-tag>
           <el-tag v-else type="info">No</el-tag>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" width="70" label="Winner">
+      <el-table-column align="center" width="90" label="Winner">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.isWinner" type="success">Yes</el-tag>
           <el-tag v-else type="info">No</el-tag>
