@@ -10,6 +10,7 @@
         <el-table-column align="center" label="User">
           <template slot-scope="scope">
             {{ scope.row.steamName || 'No SteamName yet' }} ({{ scope.row.steamId }})
+            <el-tag v-if="scope.row.banned" type="danger">banned</el-tag>
           </template>
         </el-table-column>
 
