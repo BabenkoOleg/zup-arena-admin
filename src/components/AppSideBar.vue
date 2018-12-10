@@ -12,11 +12,7 @@
           <el-menu-item index="/matches">Matches</el-menu-item>
           <el-menu-item index="/users">Users</el-menu-item>
           <el-menu-item index="/api-logs">API Logs</el-menu-item>
-          <el-submenu index="3">
-            <template slot="title"><span>Settings</span></template>
-            <el-menu-item index="1-1">Lootboxes</el-menu-item>
-            <el-menu-item index="1-2">Levels</el-menu-item>
-          </el-submenu>
+          <el-menu-item index="/lootboxes">Lootboxes</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>

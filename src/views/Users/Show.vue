@@ -16,15 +16,9 @@
                 <img v-else src="../../assets/images/default-avatar.jpg" alt="">
               </div>
               <div class="steam-info-fields">
-                <p>
-                  Id: <span class="field">{{ user.steamId }}</span>
-                </p>
-                <p>
-                  Name: <span class="field">{{ user.steamName }}</span>
-                </p>
-                <p>
-                  CountryCode: <span class="field">{{ user.steamCountryCode }}</span>
-                </p>
+                <p>Id: <span class="field">{{ user.steamId }}</span></p>
+                <p>Name: <span class="field">{{ user.steamName }}</span></p>
+                <p>CountryCode: <span class="field">{{ user.steamCountryCode }}</span></p>
                 <p>
                   Banned:
                   <el-switch v-model="user.banned"
@@ -38,48 +32,29 @@
             </div>
           </el-col>
         </el-row>
-
         <el-row :gutter="20">
           <el-col :span="8">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>Progress</span>
               </div>
-              <p>
-                Level: <span class="field">{{ user.level }}</span>
-              </p>
-              <p>
-                Rank: <span class="field">{{ user.rank }}</span>
-              </p>
-              <p>
-                XP: <span class="field">{{ user.xp }}</span>
-              </p>
-              <p>
-                Money: <span class="field">{{ user.money }}</span>
-              </p>
+              <p>Level: <span class="field">{{ user.level }}</span></p>
+              <p>Rank: <span class="field">{{ user.rank }}</span></p>
+              <p>XP: <span class="field">{{ user.xp }}</span></p>
+              <p>Money: <span class="field">{{ user.money }}</span></p>
             </el-card>
           </el-col>
-
           <el-col :span="8">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>Matches</span>
               </div>
-              <p>
-                Total: <span class="field">{{ user.matches.total }}</span>
-              </p>
-              <p>
-                Victories: <span class="field">{{ user.matches.victories }}</span>
-              </p>
-              <p>
-                Defeats: <span class="field">{{ user.matches.defeats }}</span>
-              </p>
-              <p>
-                Winning percentage: <span class="field">{{ user.matches.winningPercentage }}%</span>
-              </p>
+              <p>Total: <span class="field">{{ user.matches.total }}</span></p>
+              <p>Victories: <span class="field">{{ user.matches.victories }}</span></p>
+              <p>Defeats: <span class="field">{{ user.matches.defeats }}</span></p>
+              <p>Winning: <span class="field">{{ user.matches.winningPercentage }}%</span></p>
             </el-card>
           </el-col>
-
           <el-col :span="8">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -120,7 +95,7 @@ export default {
     },
     changeBanned(value) {
       this.isLoading = true;
-      this[actionTypes.UPDATE]({ id: this.user.steamId, params: { banned: value } })
+      this[actionTypes.UPDATE]({ id: this.user.steamId, body: { banned: value } })
         .then(() => {
           this.user.banned = value;
           this.isLoading = false;

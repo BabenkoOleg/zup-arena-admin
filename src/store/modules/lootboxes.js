@@ -7,6 +7,6 @@ export default {
   namespaced: true,
   state: {},
   actions: {
-    ...actionsFactory('matches', instance),
+    ...actionsFactory('lootboxes', instance),
   },
 };
