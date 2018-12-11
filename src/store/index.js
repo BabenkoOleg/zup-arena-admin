@@ -10,6 +10,7 @@ import auth from './modules/auth';
 import apiLogs from './modules/apiLogs';
 import matches from './modules/matches';
 import users from './modules/users';
+import lootboxes from './modules/lootboxes';
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     apiLogs,
     matches,
     users,
+    lootboxes,
   },
 });
 

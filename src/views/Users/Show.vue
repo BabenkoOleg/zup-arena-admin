@@ -88,10 +88,11 @@ export default {
     ...mapActions('users', [actionTypes.SHOW, actionTypes.UPDATE]),
     refresh() {
       this.isLoading = true;
-      this[actionTypes.SHOW]({ id: this.$route.params.id }).then((user) => {
-        this.user = user;
-        this.isLoading = false;
-      });
+      this[actionTypes.SHOW]({ id: this.$route.params.id })
+        .then((user) => {
+          this.user = user;
+          this.isLoading = false;
+        });
     },
     changeBanned(value) {
       this.isLoading = true;

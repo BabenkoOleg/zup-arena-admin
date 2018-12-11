@@ -1,56 +1,37 @@
 <template>
-  <div class="users full-height">
+  <div class="lootboxes full-height">
     <el-card class="box-card full-height" v-loading="isLoading">
       <div slot="header" class="clearfix">
-        <span>Users</span>
+        <span>Lootboxes</span>
         <el-button style="float: right; padding: 3px 0" type="text"
                    @click="refresh">Refresh</el-button>
+        <el-button style="float: right; padding: 3px 0; margin-right: 10px" type="text"
+                   @click="create">Create new</el-button>
       </div>
-      <el-table :data="users" style="width: 100%" @row-click="openUser">
-        <el-table-column align="center" label="User">
+      <el-table :data="lootboxes" style="width: 100%" @row-click="edit">
+        <el-table-column align="center" prop="steamId" label="SteamId"></el-table-column>
+        <el-table-column align="center" prop="name" label="Name"></el-table-column>
+        <el-table-column align="center" prop="price" label="Price"></el-table-column>
+        <el-table-column align="center" label="Reward">
           <template slot-scope="scope">
-            {{ scope.row.steamName || 'No SteamName yet' }} ({{ scope.row.steamId }})
-            <el-tag v-if="scope.row.banned" type="danger">banned</el-tag>
+            <el-tag v-if="scope.row.reward" type="success">Yes</el-tag>
+            <el-tag v-else type="info">No</el-tag>
           </template>
         </el-table-column>
-
-        <el-table-column align="center" width="120" prop="level" label="Level">
+        <el-table-column align="center" width="0" label="">
+          <template slot-scope="scope">
+            <div class="controls">
+              <i class="el-icon-edit"></i>
+            </div>
+          </template>
         </el-table-column>
-
-        <el-table-column align="center" width="120" prop="rank" label="Rank">
+        <el-table-column align="center" width="0" label="">
+          <template slot-scope="scope">
+            <div class="controls">
+              <i class="el-icon-delete"></i>
+            </div>
+          </template>
         </el-table-column>
-
-        <el-table-column align="center" width="120" prop="matches" label="Matches">
-        </el-table-column>
-
-        <el-table-column align="center" width="120" prop="frags" label="Frags">
-        </el-table-column>
-
-        <el-table-column align="center" width="120" prop="money" label="Money">
-        </el-table-column>
-
-        <el-table-column align="center" width="120" prop="xp" label="XP">
-        </el-table-column>
-
-        <!-- <el-table-column align="center" width="90" label="Frags">
-          <el-table-column align="center" width="90" label="Approved">
-            <template slot-scope="scope">
-              {{ scope.row.frags.approved }}
-            </template>
-          </el-table-column>
-
-          <el-table-column align="center" width="90" label="Teammate">
-            <template slot-scope="scope">
-              {{ scope.row.frags.forfeits }}
-            </template>
-          </el-table-column>
-
-          <el-table-column align="center" width="90" label="Suicide">
-            <template slot-scope="scope">
-              {{ scope.row.frags.suicides }}
-            </template>
-          </el-table-column>
-        </el-table-column> -->
       </el-table>
     </el-card>
   </div>
@@ -58,28 +39,31 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { actionTypes } from '@/store/modules/users';
+import { actionTypes } from '@/store/modules/lootboxes';
 
 export default {
   data() {
     return {
       isLoading: true,
-      users: [],
+      lootboxes: [],
     };
   },
   methods: {
-    ...mapActions('users', [actionTypes.INDEX]),
+    ...mapActions('lootboxes', [actionTypes.INDEX]),
     refresh() {
       this.isLoading = true;
-      this[actionTypes.INDEX]().then((users) => {
-        this.users = users;
+      this[actionTypes.INDEX]().then((lootboxes) => {
+        this.lootboxes = lootboxes;
         this.isLoading = false;
       });
     },
-    openUser(row) {
-      const index = (this.users.indexOf(row));
-      this.$router.push({ name: 'UsersShow', params: { id: this.users[index].steamId } });
+    edit(row) {
+      const index = (this.lootboxes.indexOf(row));
+      this.$router.push({ name: 'LootboxesEdit', params: { id: this.lootboxes[index].id } });
     },
+    create() {
+      this.$router.push({ name: 'LootboxesEdit' });
+    }
   },
   mounted() {
     this.refresh();
@@ -88,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.users {
+.lootboxes {
   height: 100%;
 
   /deep/ .el-table__row {

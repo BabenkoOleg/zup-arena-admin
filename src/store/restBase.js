@@ -16,7 +16,7 @@ export const actionsFactory = (endpoint, instance) => {
     create: () => endpoint,
     edit: id => `${endpoint}/${id}/edit`,
     update: id => `${endpoint}/${id}`,
-    desptoy: id => `${endpoint}/${id}`,
+    destroy: id => `${endpoint}/${id}`,
   };
 
   return {
@@ -57,7 +57,7 @@ export const actionsFactory = (endpoint, instance) => {
     },
 
     [actionTypes.DESTROY](context, { id }) {
-      return instance.put(endpoints.desptoy(id))
+      return instance.delete(endpoints.destroy(id))
         .then(() => Promise.resolve())
         .catch(error => Promise.reject(error));
     },

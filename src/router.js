@@ -12,6 +12,9 @@ import MatchesShow from '@/views/Matches/Show';
 import UsersIndex from '@/views/Users/Index';
 import UsersShow from '@/views/Users/Show';
 
+import LootboxesIndex from '@/views/Lootboxes/Index';
+import LootboxesForm from '@/views/Lootboxes/Form';
+
 import store from '@/store';
 
 const ifNotAuthenticated = (to, from, next) => {
@@ -69,6 +72,24 @@ export default new Router({
       path: '/api-logs/:id',
       name: 'ApiLogsShow',
       component: ApiLogsShow,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/lootboxes',
+      name: 'LootboxesIndex',
+      component: LootboxesIndex,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/lootboxes/:id/edit',
+      name: 'LootboxesEdit',
+      component: LootboxesForm,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/lootboxes/new',
+      name: 'LootboxesNew',
+      component: LootboxesForm,
       beforeEnter: ifAuthenticated,
     },
   ],

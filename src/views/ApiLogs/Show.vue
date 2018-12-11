@@ -54,10 +54,11 @@ export default {
     ...mapActions('apiLogs', [actionTypes.SHOW]),
     refresh() {
       this.isLoading = true;
-      this[actionTypes.SHOW]({ id: this.$route.params.id }).then((apiLog) => {
-        this.apiLog = apiLog;
-        this.isLoading = false;
-      });
+      this[actionTypes.SHOW]({ id: this.$route.params.id })
+        .then((apiLog) => {
+          this.apiLog = apiLog;
+          this.isLoading = false;
+        });
     },
   },
   mounted() {

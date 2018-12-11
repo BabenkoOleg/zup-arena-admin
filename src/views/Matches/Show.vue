@@ -41,11 +41,12 @@ export default {
     ...mapActions('matches', [actionTypes.SHOW]),
     refresh() {
       this.isLoading = true;
-      this[actionTypes.SHOW]({ id: this.$route.params.id }).then((match) => {
-        this.match = match;
-        this.match.rounds = this.match.rounds.reverse();
-        this.isLoading = false;
-      });
+      this[actionTypes.SHOW]({ id: this.$route.params.id })
+        .then((match) => {
+          this.match = match;
+          this.match.rounds = this.match.rounds.reverse();
+          this.isLoading = false;
+        });
     },
   },
   mounted() {

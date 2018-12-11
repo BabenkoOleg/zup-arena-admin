@@ -43,6 +43,10 @@ body {
   margin: 0;
 }
 
+.full-height {
+  height: 100%;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,10 +58,6 @@ body {
 
   .el-main {
     padding: 0px;
-
-    .full-height {
-      height: 100%;
-    }
 
     .el-card {
       border: none;
@@ -72,7 +72,7 @@ body {
       }
 
       &__body {
-        padding: 0 20px;
+        padding: 20px;
       }
     }
 
