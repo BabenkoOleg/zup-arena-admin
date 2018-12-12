@@ -36,7 +36,7 @@ export default {
         this.$message.success('Signed out successfully');
       });
     },
-  }
+  },
 };
 </script>
 

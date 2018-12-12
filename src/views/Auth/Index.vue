@@ -67,7 +67,7 @@ export default {
         if (valid) {
           this.isLoading = true;
           this[actionTypes.SIGN_IN]({ body: this.credentials })
-            .then((message) => {
+            .then(() => {
               this.isLoading = false;
               this.$message.success('Signed in successfully');
               this.$router.push({ name: 'MatchesIndex' });
