@@ -13,6 +13,7 @@
           <el-menu-item index="/users">Users</el-menu-item>
           <el-menu-item index="/api-logs">API Logs</el-menu-item>
           <el-menu-item index="/lootboxes">Lootboxes</el-menu-item>
+          <el-menu-item index="/security">Security</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>

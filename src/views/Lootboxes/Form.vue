@@ -6,7 +6,7 @@
         <el-button v-if="id"
                    style="float: right; padding: 3px 0"
                    type="text"
-                   @click="deleteDialog">
+                   @click="showDeleteDialog">
           Delete
         </el-button>
       </div>
@@ -47,7 +47,7 @@
       <span>Are you sure you want to delete lootbox?</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="isDeleteDialogVisible = false">Cancel</el-button>
-        <el-button type="danger" @click="deleteConfirm">Confirm</el-button>
+        <el-button type="danger" @click="confirmDelete">Confirm</el-button>
       </span>
     </el-dialog>
   </div>
@@ -66,13 +66,25 @@ export default {
       lootbox: {},
       rules: {
         steamId: [
-          { required: true, message: 'Please input SteamId', trigger: 'blur' },
+          {
+            required: true,
+            message: 'Please input SteamId',
+            trigger: 'change',
+          },
         ],
         name: [
-          { required: true, message: 'Please input name', trigger: 'blur' },
+          {
+            required: true,
+            message: 'Please input name',
+            trigger: 'change',
+          },
         ],
         price: [
-          { required: true, message: 'Please input price', trigger: 'blur' },
+          {
+            required: true,
+            message: 'Please input price',
+            trigger: 'change',
+          },
         ],
       },
     };
@@ -84,12 +96,12 @@ export default {
   },
   methods: {
     ...mapActions('lootboxes', [
-        actionTypes.NEW,
-        actionTypes.CREATE,
-        actionTypes.EDIT,
-        actionTypes.UPDATE,
-        actionTypes.DESTROY,
-      ]),
+      actionTypes.NEW,
+      actionTypes.CREATE,
+      actionTypes.EDIT,
+      actionTypes.UPDATE,
+      actionTypes.DESTROY,
+    ]),
 
     submit() {
       this.$refs.form.validate((valid) => {
@@ -104,7 +116,7 @@ export default {
 
           request.then(() => {
             this.$message({
-              message: `Lootbox successfully ${this.id ? 'updated' : 'created' }`,
+              message: `Lootbox successfully ${this.id ? 'updated' : 'created'}`,
               type: 'success',
             });
             this.$router.push({ name: 'LootboxesIndex' });
@@ -115,11 +127,11 @@ export default {
       });
     },
 
-    deleteDialog() {
+    showDeleteDialog() {
       this.isDeleteDialogVisible = true;
     },
 
-    deleteConfirm() {
+    confirmDelete() {
       this[actionTypes.DESTROY]({ id: this.id })
         .then(() => {
           this.isDeleteDialogVisible = false;

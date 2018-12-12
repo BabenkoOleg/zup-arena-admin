@@ -15,6 +15,8 @@ import UsersShow from '@/views/Users/Show';
 import LootboxesIndex from '@/views/Lootboxes/Index';
 import LootboxesForm from '@/views/Lootboxes/Form';
 
+import SecurityShow from '@/views/Security/Show';
+
 import store from '@/store';
 
 const ifNotAuthenticated = (to, from, next) => {
@@ -90,6 +92,12 @@ export default new Router({
       path: '/lootboxes/new',
       name: 'LootboxesNew',
       component: LootboxesForm,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/security',
+      name: 'SecurityShow',
+      component: SecurityShow,
       beforeEnter: ifAuthenticated,
     },
   ],

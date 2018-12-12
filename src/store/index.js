@@ -11,6 +11,7 @@ import apiLogs from './modules/apiLogs';
 import matches from './modules/matches';
 import users from './modules/users';
 import lootboxes from './modules/lootboxes';
+import security from './modules/security';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
     matches,
     users,
     lootboxes,
+    security,
   },
 });
 
