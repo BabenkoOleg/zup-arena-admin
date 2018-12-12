@@ -4,30 +4,18 @@
       <div slot="header" class="clearfix">
         <span>SignIn</span>
       </div>
-      <el-form :model="form" ref="form" status-icon :rules="rules" @validate="validate">
+      <el-form :model="credentials" ref="form" status-icon :rules="rules">
         <div class="inputs">
           <el-form-item label="Login" prop="login">
-            <el-input type="text"
-                      v-model="form.login"
-                      autocomplete="off"
-                      @input="validateField('login')">
-            </el-input>
+            <el-input type="text" v-model="credentials.login" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Password" prop="password">
-            <el-input type="password"
-                      v-model="form.password"
-                      autocomplete="off"
-                      @input="validateField('password')">
+            <el-input type="password" v-model="credentials.password" autocomplete="off">
             </el-input>
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="success"
-                     :disabled="!isValid"
-                     :loading="isLoading"
-                     @click="signIn">
-            Sign In
-          </el-button>
+          <el-button type="success" :loading="isLoading" @click="signIn">Sign In</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -41,52 +29,56 @@ import { actionTypes } from '@/store/modules/auth';
 export default {
   data() {
     return {
-      form: {
-        login: '',
-        password: '',
-      },
+      credentials: {},
       rules: {
         login: [
-          { required: true, message: 'Please input login', trigger: 'blur' },
+          {
+            required: true,
+            message: 'Please input login',
+            trigger: 'change',
+          },
+          {
+            min: 4,
+            message: 'Length should be 4 or more characters',
+            trigger: 'change',
+          },
         ],
         password: [
-          { required: true, message: 'Please input password', trigger: 'blur' },
-          { min: 8, message: 'Must not be less than 8 characters', trigger: 'blur' },
+          {
+            required: true,
+            message: 'Please input password',
+            trigger: 'change',
+          },
+          {
+            min: 8,
+            message: 'Length should be 8 or more characters',
+            trigger: 'change',
+          },
         ],
       },
       isLoading: false,
-      isLoginValid: false,
-      isPasswordValid: false,
     };
-  },
-  computed: {
-    isValid() {
-      return this.isLoginValid && this.isPasswordValid;
-    },
   },
   methods: {
     ...mapActions('auth', [actionTypes.SIGN_IN]),
 
     signIn() {
-      this.isLoading = true;
-      this[actionTypes.SIGN_IN]({
-        login: this.form.login,
-        password: this.form.password,
-      }).then((message) => {
-        this.isLoading = false;
-        this.$message.success('Signed in successfully');
-        this.$router.push({ name: 'MatchesIndex' });
-      }).catch((error) => {
-        this.isLoading = false;
-        this.$message.error(error.response.data.error);
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.isLoading = true;
+          this[actionTypes.SIGN_IN]({ body: this.credentials })
+            .then((message) => {
+              this.isLoading = false;
+              this.$message.success('Signed in successfully');
+              this.$router.push({ name: 'MatchesIndex' });
+            }).catch((error) => {
+              this.isLoading = false;
+              this.$message.error(error.response.data.error);
+            });
+        } else {
+          return false;
+        }
       });
-    },
-    validateField(field) {
-      this.$refs.form.validateField(field);
-    },
-    validate(field, value) {
-      if (field === 'login') return this.isLoginValid = value;
-      if (field === 'password') return this.isPasswordValid = value;
     },
   },
 };

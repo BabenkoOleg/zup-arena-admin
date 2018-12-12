@@ -23,8 +23,8 @@ export default {
   },
 
   actions: {
-    [actionTypes.SIGN_IN]({ commit }, { login, password }) {
-      return instance.post(endpoints.CREATE, { login, password })
+    [actionTypes.SIGN_IN]({ commit }, { body }) {
+      return instance.post(endpoints.CREATE, body)
         .then(({ data }) => {
           commit(mutationTypes.SET_JWT, data.jwt);
           commit(mutationTypes.SET_IS_LOGGED_IN, true);
