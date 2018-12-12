@@ -36,7 +36,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { actionTypes as authActionTypes } from '@/store/modules/auth';
+import { actionTypes } from '@/store/modules/auth';
 
 export default {
   data() {
@@ -65,20 +65,20 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth', [authActionTypes.SIGN_IN]),
+    ...mapActions('auth', [actionTypes.SIGN_IN]),
 
     signIn() {
       this.isLoading = true;
-      this[authActionTypes.SIGN_IN]({
+      this[actionTypes.SIGN_IN]({
         login: this.form.login,
         password: this.form.password,
       }).then((message) => {
         this.isLoading = false;
-        this.$message({ message, type: 'success' });
+        this.$message.success('Signed in successfully');
         this.$router.push({ name: 'MatchesIndex' });
       }).catch((error) => {
         this.isLoading = false;
-        this.$message({ message: error.response.data.error, type: 'error' });
+        this.$message.error(error.response.data.error);
       });
     },
     validateField(field) {

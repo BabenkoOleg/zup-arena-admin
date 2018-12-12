@@ -14,6 +14,7 @@
           <el-menu-item index="/api-logs">API Logs</el-menu-item>
           <el-menu-item index="/lootboxes">Lootboxes</el-menu-item>
           <el-menu-item index="/security">Security</el-menu-item>
+          <el-menu-item index="/sign-in" @click="signOut">Sign Out</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -21,8 +22,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { actionTypes } from '@/store/modules/auth';
+
 export default {
   name: 'app-side-bar',
+  methods: {
+    ...mapActions('auth', [actionTypes.SIGN_OUT]),
+
+    signOut() {
+      this[actionTypes.SIGN_OUT]().then(() => {
+        this.$router.push({ name: 'AuthIndex' });
+        this.$message.success('Signed out successfully');
+      });
+    },
+  }
 };
 </script>
 

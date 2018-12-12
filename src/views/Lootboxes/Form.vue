@@ -115,10 +115,7 @@ export default {
           }
 
           request.then(() => {
-            this.$message({
-              message: `Lootbox successfully ${this.id ? 'updated' : 'created'}`,
-              type: 'success',
-            });
+            this.$message.success(`Lootbox successfully ${this.id ? 'updated' : 'created'}`);
             this.$router.push({ name: 'LootboxesIndex' });
           });
         } else {
@@ -135,7 +132,7 @@ export default {
       this[actionTypes.DESTROY]({ id: this.id })
         .then(() => {
           this.isDeleteDialogVisible = false;
-          this.$message({ message: 'Lootbox successfully deleted', type: 'success' });
+          this.$message.success('Lootbox successfully deleted');
           this.$router.push({ name: 'LootboxesIndex' });
         });
     },

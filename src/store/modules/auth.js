@@ -2,7 +2,6 @@ import instance from '../instance';
 
 const endpoints = {
   CREATE: '/auth',
-  DESTROY: '/auth',
 };
 
 export const actionTypes = {
@@ -29,14 +28,14 @@ export default {
         .then(({ data }) => {
           commit(mutationTypes.SET_JWT, data.jwt);
           commit(mutationTypes.SET_IS_LOGGED_IN, true);
-          return Promise.resolve('Signed in successfully');
+          return Promise.resolve();
         });
     },
 
-    [actionTypes.SHOW](context, { id }) {
-      return instance.get(endpoints.SHOW(id))
-        .then(({ data }) => Promise.resolve(data.data))
-        .catch(error => Promise.reject(error));
+    [actionTypes.SIGN_OUT]({ commit }) {
+      commit(mutationTypes.SET_IS_LOGGED_IN, false);
+      commit(mutationTypes.CLEAR_JWT);
+      return Promise.resolve();
     },
   },
 

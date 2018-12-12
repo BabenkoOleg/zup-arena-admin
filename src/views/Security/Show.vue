@@ -115,10 +115,7 @@ export default {
             .then(() => {
               this.isLoading = false;
               this.resetForm();
-              this.$message({
-                message: 'Credentials successfully updated',
-                type: 'success',
-              });
+              this.$message.success('Credentials successfully updated');
             })
             .catch(error => {
               this.isLoading = false;
